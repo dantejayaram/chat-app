@@ -1,11 +1,15 @@
+// middleware/protectRoute.js
+
+import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
-export const getUsersForSidebar=async(req,res)=>{
-    try{
-        const loggedInUserId=req.user._id
-        const filteredUsers=await User.find({_id:{$ne:loggedInUserId}}).select("-password")
-        res.status(200).json(filteredUsers);
-    }catch(error)
-    {
-        res.status(500).json({error:"Internal server error"}); 
+
+const protectRoute = async (req, res, next) => {
+    try {
+        // Your protectRoute middleware logic here
+    } catch (error) {
+        console.log("Error in protectRoute middleware:", error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
+
+export default protectRoute;
